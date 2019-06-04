@@ -19,14 +19,14 @@ export default class App extends React.Component {
   }
 
   calculate() {
-    
+
     var p = this.state.balance;
-    var r = this.state.rate *.01 / 12;
+    var r = this.state.rate * .01 / 12;
     var n = this.state.term;
     var total = n * 12;
-    var d = p * ((r * Math.pow((1+r),total)) / (Math.pow((1+r), total) -1));
-   
-    this.setState ({ output: d.toFixed(2)});
+    var d = p * ((r * Math.pow((1 + r), total)) / (Math.pow((1 + r), total) - 1));
+
+    this.setState({ output: d.toFixed(2) });
   }
 
   render() {
@@ -34,9 +34,8 @@ export default class App extends React.Component {
       <div className='container'>
         <h3>Mortgage Calculator</h3>
         <div>
-        <strong >Loan balance</strong><input type="number" name="balance" placeholder="type value here" value={this.state.balance} onChange={this.stateValues}></input>
+          <strong >Loan balance</strong><input type="number" name="balance" placeholder="type value here" value={this.state.balance} onChange={this.stateValues}></input>
         </div>
-
         <div><strong>Interest Rate (%)</strong> <input type="number" name="rate" placeholder="type your rate here" value={this.state.rate} onChange={this.stateValues}></input></div>
         <div><strong>Loan Term (years)</strong> <select type="number" name="term" value={this.state.term} onChange={this.stateValues}>
           <option value="15" type="number">15</option>
@@ -44,7 +43,6 @@ export default class App extends React.Component {
         </select></div>
 
         <button name="submit" className="btn btn-primary" onClick={this.calculate}>calculate</button>
-
         <div name="output" id="output" onChange={this.stateValues}>{`$${this.state.output} is your payment.`}</div>
       </div>
     );
