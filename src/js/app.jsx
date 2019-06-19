@@ -19,6 +19,13 @@ export default class App extends React.Component {
   }
 
   calculate() {
+    if (this.state.balance === '') {
+      alert("please type loan balance")
+      return false;
+    } else if (this.state.rate === '') {
+      alert("please type interest rate")
+      return false;
+    }
 
     var p = this.state.balance;
     var r = this.state.rate * .01 / 12;
@@ -31,19 +38,36 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-        <h3>Mortgage Calculator</h3>
-        <div>
-          <strong >Loan balance</strong><input type="number" name="balance" placeholder="type value here" value={this.state.balance} onChange={this.stateValues}></input>
-        </div>
-        <div><strong>Interest Rate (%)</strong> <input type="number" name="rate" placeholder="type your rate here" value={this.state.rate} onChange={this.stateValues}></input></div>
-        <div><strong>Loan Term (years)</strong> <select type="number" name="term" value={this.state.term} onChange={this.stateValues}>
-          <option value="15" type="number">15</option>
-          <option value="30" type="number">30</option>
-        </select></div>
+      <div className="container">
+        <div className='panel panel-default'>
+          <h3>Mortgage Calculator</h3>
 
-        <button name="submit" className="btn btn-primary" onClick={this.calculate}>calculate</button>
-        <div name="output" id="output" onChange={this.stateValues}>{`$${this.state.output} is your payment.`}</div>
+          <div className="panel-body">
+            <strong> Loan Balance: </strong> <input name="balance" type="number" value={this.state.balance} onChange={this.stateValues} placeholder="type loan balance" className="form-lg input-md" />
+          </div>
+          <br />
+
+          <div>
+            <strong> Interest Rate (%): </strong> <input name="rate" type="number" step="0.01" value={this.state.rate} onChange={this.stateValues} placeholder="type interest rate" />
+          </div>
+          <br />
+
+          <div>
+            <strong>Loan Term (years)</strong> <select name="term" value={this.state.term}>
+              <option value="15">15</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+
+          <br />
+          <div>
+            <button className="btn btn-primary" name="submit" onClick={this.calculate}>Calculate</button>
+          </div>
+          <br />
+
+          <div className="well well-md" id="output" name="output">{`$${this.state.output} is your payment.`}</div>
+
+        </div>
       </div>
     );
   }
